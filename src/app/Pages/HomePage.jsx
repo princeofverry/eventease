@@ -7,8 +7,8 @@ const HomePage = () => {
     return (
         <div className='flex flex-row items-center'>
             {/* Kontainer Teks di Kiri */}
-            <div className='px-6 w-1/2'>
-                <div className='font-bold text-6xl w-full text-left mb-4'>
+            <div className='px-12 w-1/2'>
+                <div className='font-bold text-5xl w-full text-left mb-4'>
                     <h1>Mari Sukseskan</h1>
                     <h1><a className='text-[#4F9CF9]'>Event</a> Kamu Bersama</h1>
                     <h1><a className='text-[#4F9CF9]'>EventEase</a></h1>

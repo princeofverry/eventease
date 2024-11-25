@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image'; // Import Image from next/image
 import { Star } from 'lucide-react';
 
 const Testimonial = () => {
@@ -34,15 +35,17 @@ const Testimonial = () => {
                             key={index}
                             className="bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2"
                         >
-
-                            <img
+                            {/* Optimized Image */}
+                            <Image
                                 src={testimonial.image}
                                 alt={testimonial.name}
-                                className="w-12 h-12 rounded-full object-cover"
+                                width={48} // Set width for image
+                                height={48} // Set height for image
+                                className="rounded-full object-cover"
                             />
                             {/* Testimonial Text */}
                             <p className="text-gray-600 mb-6">
-                                "{testimonial.text}"
+                                &quot;{testimonial.text}&quot; {/* Escape quotes */}
                             </p>
 
                             {/* Profile Section */}

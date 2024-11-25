@@ -2,6 +2,7 @@ import HomePage from "@/app/Pages/HomePage";
 import ScrollableCards from "@/components/Cards/ScrollableCards";
 import Testimonial from "@/components/Cards/Testimonial";
 import CardDaftar from "@/components/ui/CardDaftar";
+import Contact from "@/components/ui/Contact";
 // import EventOrganizer from "@/components/ui/EventOrganizer";
 import { cardData } from "@/data/cardData";
 
@@ -28,6 +29,10 @@ export default function Home() {
 
       <section>
         <Testimonial />
+      </section>
+
+      <section>
+        <Contact />
       </section>
     </>
   );

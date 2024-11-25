@@ -24,7 +24,7 @@ const Testimonial = () => {
     ];
 
     return (
-        <div className="py-16 px-4 bg-gray-50">
+        <div className="py-16 px-4">
             <div className="max-w-6xl mx-auto">
                 <h1 className='font-bold text-4xl text-center mb-12'>What they said?</h1>
 

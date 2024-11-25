@@ -12,11 +12,11 @@ const ScrollableCards = ({ type, data }) => {
   }[type]
 
   return (
-    <div className="w-full overflow-hidden px-4 py-8">
-      <div 
+    <div className="w-full overflow-hidden px-12 py-8">
+      <div
         className="flex overflow-x-auto gap-6 scroll-smooth scrollbar-hide snap-x snap-mandatory"
-        style={{ 
-          scrollbarWidth: 'none', 
+        style={{
+          scrollbarWidth: 'none',
           msOverflowStyle: 'none',
           WebkitOverflowScrolling: 'touch'
         }}

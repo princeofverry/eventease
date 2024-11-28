@@ -1,7 +1,6 @@
 import Search from '@/components/ui/search'
-import React from 'react'
-import circle from '/public/circle.png'
 import Image from 'next/image'
+import circle from '/public/circle.png'
 
 const HomePage = () => {
     return (

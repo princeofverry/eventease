@@ -1,7 +1,16 @@
+'use client'
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import { Facebook, Instagram, Twitter, Mail, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
+    const pathname = usePathname()
+
+    // Hide footer on login page
+    if (pathname === '/login') {
+        return null
+    }
+
     return (
         <footer className="bg-[#043873] text-white">
             <div className="container mx-auto px-6 py-12">

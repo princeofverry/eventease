@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 
 export default function ProfileSidebar({ setActivePage }) {
@@ -12,7 +13,7 @@ export default function ProfileSidebar({ setActivePage }) {
   return (
     <aside className="flex flex-col items-center px-4 py-10 font-semibold rounded-lg bg-blue-400 bg-opacity-10 min-w-[240px] w-[262px]">
       <div className="flex flex-col items-center text-xl leading-relaxed text-black">
-        <img
+        <Image
           loading="lazy"
           src="/Avatar.png"
           alt="Sofia Havertz Profile"
@@ -25,11 +26,10 @@ export default function ProfileSidebar({ setActivePage }) {
           <button
             key={item}
             onClick={() => handleNavigation(item)}
-            className={`py-2 text-left hover:bg-blue-50 focus:bg-blue-50 focus:outline-none ${
-              index === 0 
-                ? "border-b border-solid border-b-neutral-900 text-neutral-900" 
+            className={`py-2 text-left hover:bg-blue-50 focus:bg-blue-50 focus:outline-none ${index === 0
+                ? "border-b border-solid border-b-neutral-900 text-neutral-900"
                 : "border-b border-solid border-b-white border-b-opacity-0"
-            } ${index > 0 ? "mt-3" : ""} w-full`}
+              } ${index > 0 ? "mt-3" : ""} w-full`}
           >
             {item}
           </button>

@@ -4,27 +4,46 @@ import circle from '/public/circle.png'
 
 const HomePage = () => {
     return (
-        <div className='flex flex-row items-center'>
-            {/* Kontainer Teks di Kiri */}
-            <div className='px-12 w-1/2'>
-                <div className='font-bold text-5xl w-full text-left mb-4'>
-                    <h1>Mari Sukseskan</h1>
-                    <h1><a className='text-[#4F9CF9]'>Event</a> Kamu Bersama</h1>
-                    <h1><a className='text-[#4F9CF9]'>EventEase</a></h1>
+        <div className='relative flex flex-col md:flex-row items-center justify-evenly px-4 md:px-12 py-8 md:py-16'>
+            {/* Kontainer Gambar untuk Mobile - Berada di belakang */}
+            <div className='absolute inset-0 z-0 md:hidden opacity-20'>
+                <div className='relative w-full h-full'>
+                    <Image
+                        alt='circle background'
+                        src={circle}
+                        fill
+                        className='object-contain object-center'
+                        priority
+                    />
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, magni?</p>
-                <Search />
             </div>
 
-            {/* Gambar di Kanan */}
-            <div className='w-5/12 right-12'>
-                <Image
-                    alt='circle'
-                    src={circle}
-                    layout="contain" // Mengisi kontainer secara penuh
-                    objectFit="contain" // Menjaga gambar tetap proporsional dan menutupi area
-                    priority
-                />
+            {/* Kontainer Teks di Kiri - Ditinggikan di atas gambar */}
+            <div className='relative z-10 w-full md:w-1/2 text-center md:text-left px-4 md:px-0'>
+                <div className='font-bold text-3xl md:text-4xl lg:text-5xl w-full mb-4'>
+                    <h1>Mari Sukseskan</h1>
+                    <h1><span className='text-[#4F9CF9]'>Event</span> Kamu Bersama</h1>
+                    <h1><span className='text-[#4F9CF9]'>EventEase</span></h1>
+                </div>
+                <p className='mb-6 text-base md:text-lg max-w-prose mx-auto md:mx-0'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, magni?
+                </p>
+                <div className='flex justify-center md:justify-start'>
+                    <Search />
+                </div>
+            </div>
+
+            {/* Gambar di Kanan untuk Desktop */}
+            <div className='hidden md:block w-5/12 max-w-md'>
+                <div className='relative w-full aspect-square'>
+                    <Image
+                        alt='circle'
+                        src={circle}
+                        fill
+                        className='object-contain'
+                        priority
+                    />
+                </div>
             </div>
         </div>
     )

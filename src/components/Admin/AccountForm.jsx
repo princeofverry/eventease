@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Button } from "../ui/button";
 
 export default function AccountForm() {
   const handleSubmit = (e) => {
@@ -65,6 +66,7 @@ export default function AccountForm() {
               required
             />
           </div>
+          <Button className="my-4">Submit</Button>
         </form>
       </div>
     </section>

@@ -1,9 +1,30 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { Button } from './button'
 import Image from 'next/image'
 import abstract from '/public/abstract.png'
+import { useRouter } from "next/navigation";
 
 const CardDaftar = () => {
+  const [isMounted, setIsMounted] = useState(false)
+  const router = useRouter()
+
+  // Pastikan bahwa kode hanya dijalankan setelah komponen dirender di klien
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const handleLearnMoreClick = () => {
+    if (isMounted) {
+      router.push('/form')  // Navigasi ke halaman form
+    }
+  }
+
+  if (!isMounted) {
+    // Jika komponen belum terpasang di klien, jangan render apapun
+    return null
+  }
+
   return (
     <div className='w-full px-4 sm:px-6 md:px-12 relative'>
       <div className='bg-[#043873] rounded-2xl flex py-8 flex-col items-center text-white my-8 overflow-hidden'>
@@ -26,7 +47,11 @@ const CardDaftar = () => {
           <p className='text-xs sm:text-sm mb-6 sm:mb-8 max-w-2xl mx-auto'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum, pariatur.
           </p>
-          <Button className="mb-6 sm:mb-8 md:mb-12 bg-[#4F9CF9] py-3 sm:py-4 md:py-6 px-6 sm:px-8 md:px-12">
+          {/* Button that triggers navigation via useRouter */}
+          <Button
+            onClick={handleLearnMoreClick}
+            className="mb-6 sm:mb-8 md:mb-12 bg-[#4F9CF9] py-3 sm:py-4 md:py-6 px-6 sm:px-8 md:px-12"
+          >
             Pelajari Lebih Lanjut →
           </Button>
         </div>

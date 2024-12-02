@@ -8,7 +8,6 @@ export default function ListBusiness() {
   const [error, setError] = useState(null);
   const [groupedBusinesses, setGroupedBusinesses] = useState({});
 
-  // Fetch verified businesses from backend
   useEffect(() => {
     const fetchBusinesses = async () => {
       try {
@@ -40,59 +39,55 @@ export default function ListBusiness() {
   }, []);
 
   const BusinessCard = ({ business }) => (
-    <div 
-      key={business._id} 
-      className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-    >
-      <div className="relative h-48 w-full">
-        <Image 
-          src={`http://localhost:5000${business.fotoUsahaUrl}`} 
-          alt={business.namaUsaha} 
-          layout="fill" 
-          objectFit="cover" 
-        />
-      </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{business.namaUsaha}</h3>
-        <p className="text-sm text-zinc-500">{business.jenisUsaha}</p>
-        <p className="mt-2 text-sm">{business.deskripsiUsaha}</p>
-        <div className="mt-4 flex items-center">
-          <span className="text-sm text-zinc-600">Kontak: </span>
-          <a 
-            href={`https://wa.me/${business.nomorWhatsApp}`} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="ml-2 text-green-600 hover:underline"
-          >
-            {business.nomorWhatsApp}
-          </a>
+    <div className="border rounded-lg p-4 mb-4 shadow-md">
+      {business.fotoUsahaUrl && (
+        <div className="mb-4 relative w-full h-48">
+          <Image 
+            src={business.fotoUsahaUrl} 
+            alt={business.namaUsaha} 
+            layout="fill" 
+            objectFit="cover" 
+            className="rounded-md"
+          />
         </div>
+      )}
+      <h2 className="text-xl font-bold mb-2">{business.namaUsaha}</h2>
+      <p className="text-gray-600 mb-2">{business.jenisUsaha}</p>
+      <p className="mb-4">{business.deskripsiUsaha}</p>
+      <div className="flex items-center">
+        <span className="font-medium mr-2">Kontak:</span>
+        <a 
+          href={`https://wa.me/${business.nomorWhatsApp}`} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-green-600 hover:underline"
+        >
+          {business.nomorWhatsApp}
+        </a>
       </div>
     </div>
   );
 
   if (loading) {
-    return <div className="p-20 text-center">Loading businesses...</div>;
+    return <div className="text-center py-4">Loading businesses...</div>;
   }
 
   if (error) {
-    return <div className="p-20 text-center text-red-500">Error: {error}</div>;
+    return <div className="text-red-500 text-center py-4">Error: {error}</div>;
   }
 
   return (
-    <section className="flex flex-col px-20 min-w-[240px] w-full max-md:px-5 max-md:max-w-full">
-      <h2 className="text-xl font-semibold leading-relaxed text-black">Daftar Usaha Terverifikasi</h2>
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="text-2xl font-bold mb-6">Daftar Usaha Terverifikasi</h1>
       
       {businesses.length === 0 ? (
-        <p className="mt-6 text-zinc-500">Belum ada usaha yang terverifikasi.</p>
+        <p className="text-center text-gray-500">Belum ada usaha yang terverifikasi.</p>
       ) : (
-        <div className="space-y-8">
+        <div>
           {Object.entries(groupedBusinesses).map(([jenisUsaha, businessList]) => (
-            <div key={jenisUsaha} className="mb-6">
-              <h3 className="text-lg font-semibold mb-4 border-b pb-2">
-                {jenisUsaha}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div key={jenisUsaha} className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">{jenisUsaha}</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {businessList.map(business => (
                   <BusinessCard key={business._id} business={business} />
                 ))}
@@ -101,6 +96,6 @@ export default function ListBusiness() {
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }

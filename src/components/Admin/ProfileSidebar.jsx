@@ -7,7 +7,7 @@ export default function ProfileSidebar({ setActivePage }) {
   const sidebarItems = ["Account", "List Business", "Request", "Log Out"];
 
   const handleNavigation = (item) => {
-    setActivePage(item); // Memperbarui halaman yang sedang aktif
+    setActivePage(item); 
   };
 
   return (

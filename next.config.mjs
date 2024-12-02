@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["xsgames.co", "localhost"], // Added "localhost" for local development
+    domains: ["xsgames.co", "localhost", "res.cloudinary.com"], 
   },
 };
 

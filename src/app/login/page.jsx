@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import router
+import { useRouter } from 'next/navigation'; 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import login_icon from '/public/login_icon.png';
@@ -10,12 +10,12 @@ const Page = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const router = useRouter(); // Inisialisasi router
+  const router = useRouter(); 
 
   const handleLogin = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',  // Pastikan menggunakan POST
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },

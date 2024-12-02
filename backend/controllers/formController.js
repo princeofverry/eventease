@@ -5,12 +5,12 @@ const path = require('path');
 exports.submitForm = async (req, res) => {
   const { jenisUsaha, namaUsaha, deskripsiUsaha, nomorWhatsApp } = req.body;
 
-  // Check if files exist
+  // Gunakan path atau URL langsung dari Cloudinary
   const ktpNpwpUrl = req.files['ktpNpwp'] 
-    ? `/uploads/${req.files['ktpNpwp'][0].filename}` 
+    ? req.files['ktpNpwp'][0].path // atau req.files['ktpNpwp'][0].url 
     : null;
   const fotoUsahaUrl = req.files['fotoUsaha'] 
-    ? `/uploads/${req.files['fotoUsaha'][0].filename}` 
+    ? req.files['fotoUsaha'][0].path // atau req.files['fotoUsaha'][0].url
     : null;
 
   try {

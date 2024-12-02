@@ -7,7 +7,6 @@ export default function RequestPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch submissions from backend
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
@@ -27,7 +26,6 @@ export default function RequestPage() {
     fetchSubmissions();
   }, []);
 
-  // Handle verification of a submission
   const handleVerification = async (id, isVerified) => {
     try {
       const response = await fetch(`http://localhost:5000/api/form/verify/${id}`, {
@@ -41,12 +39,9 @@ export default function RequestPage() {
       if (!response.ok) {
         throw new Error('Failed to update verification status');
       }
-
-      // Update local state to remove the verified/rejected submission
       setSubmissions(submissions.filter(submission => submission._id !== id));
     } catch (err) {
       console.error('Verification error:', err);
-      // Optionally show error toast
     }
   };
 

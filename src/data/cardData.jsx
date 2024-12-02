@@ -1,57 +1,92 @@
 export const cardData = {
   eo: [
     {
+      id: 0,
+      slug: "eo",
       imageUrl: "/dummycard.png",
       title: "Elegant Wedding EO",
-      description: "Spesialis wedding event organizer dengan pengalaman lebih dari 10 tahun dalam menciptakan momen pernikahan yang tak terlupakan."
+      description: "Spesialis wedding event organizer dengan pengalaman lebih dari 10 tahun dalam menciptakan momen pernikahan yang tak terlupakan.",
     },
     {
+      id: 1,
+      slug: "eo",
       imageUrl: "/dummycard.png",
-      title: "Elegant Wedding EO",
-      description: "Spesialis wedding event organizer dengan pengalaman lebih dari 10 tahun dalam menciptakan momen pernikahan yang tak terlupakan."
+      title: "Royal Event Planner",
+      description: "Mengatur berbagai acara mewah mulai dari pernikahan, ulang tahun, hingga corporate event dengan layanan premium.",
     },
     {
+      id: 2,
+      slug: "eo",
       imageUrl: "/dummycard.png",
-      title: "Elegant Wedding EO",
-      description: "Spesialis wedding event organizer dengan pengalaman lebih dari 10 tahun dalam menciptakan momen pernikahan yang tak terlupakan."
+      title: "Simple & Elegant EO",
+      description: "Event organizer yang mengutamakan desain simpel namun tetap elegan untuk semua jenis acara.",
     },
-
-    // ... more EO data
+    {
+      id: 3,
+      slug: "eo",
+      imageUrl: "/dummycard.png",
+      title: "Festive Moments EO",
+      description: "Spesialis acara outdoor yang memadukan keindahan alam dan dekorasi unik untuk momen tak terlupakan.",
+    },
   ],
   vendor: [
     {
+      id: 0,
+      slug: "vendor",
       imageUrl: "/dummycard.png",
       title: "Catering Nusantara",
-      description: "Menyediakan berbagai pilihan menu traditional hingga international dengan kualitas bintang lima."
+      description: "Menyediakan berbagai pilihan menu traditional hingga international dengan kualitas bintang lima.",
     },
     {
+      id: 1,
+      slug: "vendor",
       imageUrl: "/dummycard.png",
-      title: "Dekorasi Elegan",
-      description: "Menghadirkan dekorasi pernikahan yang memukau dengan konsep yang dapat disesuaikan dengan keinginan Anda."
+      title: "Modern Decor",
+      description: "Dekorasi modern untuk berbagai acara dengan tema unik dan personal.",
     },
     {
+      id: 2,
+      slug: "vendor",
       imageUrl: "/dummycard.png",
-      title: "Dekorasi Elegan",
-      description: "Menghadirkan dekorasi pernikahan yang memukau dengan konsep yang dapat disesuaikan dengan keinginan Anda."
+      title: "Luxury Florist",
+      description: "Spesialis rangkaian bunga premium untuk dekorasi yang memukau.",
     },
-    // ... more vendor data
+    {
+      id: 3,
+      slug: "vendor",
+      imageUrl: "/dummycard.png",
+      title: "Sound and Stage",
+      description: "Menyediakan sistem suara dan panggung terbaik untuk memastikan kelancaran acara Anda.",
+    },
   ],
   mua: [
     {
+      id: 0,
+      slug: "mua",
       imageUrl: "/dummycard.png",
       title: "Glamour MakeUp Artist",
-      description: "Professional makeup artist dengan keahlian dalam wedding makeup, graduation makeup, dan berbagai event special lainnya."
+      description: "Professional makeup artist dengan keahlian dalam wedding makeup, graduation makeup, dan berbagai event special lainnya.",
     },
     {
+      id: 1,
+      slug: "mua",
       imageUrl: "/dummycard.png",
       title: "Natural Beauty MUA",
-      description: "Spesialis dalam natural makeup yang menonjolkan kecantikan alami Anda."
+      description: "Spesialis dalam natural makeup yang menonjolkan kecantikan alami Anda.",
     },
     {
+      id: 2,
+      slug: "mua",
       imageUrl: "/dummycard.png",
-      title: "Natural Beauty MUA",
-      description: "Spesialis dalam natural makeup yang menonjolkan kecantikan alami Anda."
+      title: "Celebrity Makeup Studio",
+      description: "Memberikan layanan makeup dengan teknik dan gaya yang sering digunakan oleh para selebriti.",
     },
-    // ... more MUA data
-  ]
+    {
+      id: 3,
+      slug: "mua",
+      imageUrl: "/dummycard.png",
+      title: "Wedding Look Expert",
+      description: "Menyediakan layanan makeup lengkap untuk pengantin yang ingin tampil memukau di hari spesial mereka.",
+    },
+  ],
 }

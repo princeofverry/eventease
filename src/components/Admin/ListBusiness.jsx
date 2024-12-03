@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ListBusiness() {
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [groupedBusinesses, setGroupedBusinesses] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     const fetchBusinesses = async () => {
@@ -38,42 +40,74 @@ export default function ListBusiness() {
     fetchBusinesses();
   }, []);
 
-  const BusinessCard = ({ business }) => (
-    <div className="border rounded-lg p-4 mb-4 shadow-md">
-      {business.fotoUsahaUrl && (
-        <div className="mb-4 relative w-full h-48">
-          <Image 
-            src={business.fotoUsahaUrl} 
-            alt={business.namaUsaha} 
-            layout="fill" 
-            objectFit="cover" 
-            className="rounded-md"
-          />
+  const BusinessCard = ({ business }) => {
+    const [expanded, setExpanded] = useState(false);
+  
+    const truncateDescription = (desc, maxLength = 100) => {
+      if (desc.length <= maxLength) return desc;
+      return desc.substring(0, maxLength) + '...';
+    };
+  
+    const toggleDescription = (e) => {
+      e.stopPropagation();
+      setExpanded(!expanded);
+    };
+  
+    return (
+      <div 
+        className="border rounded-lg p-4 mb-4 shadow-md cursor-pointer hover:shadow-lg transition-shadow relative flex flex-col"
+        onClick={() => router.push(`/business/${business._id}`)}
+      >
+        {business.fotoUsahaUrl && (
+          <div className="mb-4 relative w-full h-48">
+            <Image 
+              src={business.fotoUsahaUrl} 
+              alt={business.namaUsaha} 
+              layout="fill" 
+              objectFit="cover" 
+              className="rounded-md"
+            />
+          </div>
+        )}
+        <h2 className="text-xl font-bold mb-2">{business.namaUsaha}</h2>
+        <p className="text-gray-600 mb-2">{business.jenisUsaha}</p>
+        
+        <p className="mb-4 text-left flex-grow">
+          {expanded ? business.deskripsiUsaha : truncateDescription(business.deskripsiUsaha)}
+          {business.deskripsiUsaha.length > 100 && (
+            <button 
+              onClick={toggleDescription} 
+              className="text-blue-500 hover:underline ml-2 text-sm"
+            >
+              {expanded ? 'Tampilkan lebih sedikit' : 'Lihat selengkapnya'}
+            </button>
+          )}
+        </p>
+  
+        <div className="mt-auto">
+          <div className="flex items-center">
+            <span className="font-medium mr-2">Kontak:</span>
+            <a 
+              href={`https://wa.me/${business.nomorWhatsApp}`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-green-600 hover:underline"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {business.nomorWhatsApp}
+            </a>
+          </div>
         </div>
-      )}
-      <h2 className="text-xl font-bold mb-2">{business.namaUsaha}</h2>
-      <p className="text-gray-600 mb-2">{business.jenisUsaha}</p>
-      <p className="mb-4">{business.deskripsiUsaha}</p>
-      <div className="flex items-center">
-        <span className="font-medium mr-2">Kontak:</span>
-        <a 
-          href={`https://wa.me/${business.nomorWhatsApp}`} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-green-600 hover:underline"
-        >
-          {business.nomorWhatsApp}
-        </a>
       </div>
-    </div>
-  );
-
+    );
+  };
+  
   if (loading) {
-    return <div className="text-center py-4">Loading businesses...</div>;
+    return <div className="text-center py-4">Memuat daftar usaha...</div>;
   }
 
   if (error) {
-    return <div className="text-red-500 text-center py-4">Error: {error}</div>;
+    return <div className="text-red-500 text-center py-4">Kesalahan: {error}</div>;
   }
 
   return (

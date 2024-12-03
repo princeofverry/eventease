@@ -15,5 +15,6 @@ router.post('/submit',
 router.get('/submissions', formController.getSubmissions);
 router.get('/verified-businesses', formController.getVerifiedBusinesses);
 router.post('/verify/:id', formController.verifySubmission);
+router.get('/business/:id', formController.getBusinessById);
 
 module.exports = router;

@@ -96,3 +96,19 @@ exports.verifySubmission = async (req, res) => {
     });
   }
 };
+
+// Get a specific business by ID
+exports.getBusinessById = async (req, res) => {
+  try {
+    const business = await Form.findById(req.params.id);
+    if (!business) {
+      return res.status(404).json({ message: 'Business not found' });
+    }
+    res.status(200).json(business);
+  } catch (error) {
+    res.status(500).json({ 
+      message: 'Error fetching business details', 
+      error: error.message 
+    });
+  }
+};

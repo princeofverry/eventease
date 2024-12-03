@@ -17,9 +17,9 @@ export default function ProfileSidebar({ setActivePage }) {
         loading="lazy"
         src="/Avatar.png"
         alt="Sofia Havertz Profile"
+        className="object-contain aspect-square w-[82px]"
         width={82} 
         height={82} 
-        className="object-contain aspect-square w-[82px]"
       />
         <div className="mt-1.5">Sofia Havertz</div>
       </div>
@@ -29,8 +29,8 @@ export default function ProfileSidebar({ setActivePage }) {
             key={item}
             onClick={() => handleNavigation(item)}
             className={`py-2 text-left hover:bg-blue-50 focus:bg-blue-50 focus:outline-none ${index === 0
-                ? "border-b border-solid border-b-neutral-900 text-neutral-900"
-                : "border-b border-solid border-b-white border-b-opacity-0"
+              ? "border-b border-solid border-b-neutral-900 text-neutral-900"
+              : "border-b border-solid border-b-white border-b-opacity-0"
               } ${index > 0 ? "mt-3" : ""} w-full`}
           >
             {item}

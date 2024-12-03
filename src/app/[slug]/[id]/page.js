@@ -1,10 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { use } from "react";
-import { cardData } from "@/data/cardData";
 import {
   ChevronLeft,
   Star,
@@ -15,16 +13,50 @@ import {
   Check,
 } from "lucide-react";
 
-const DetailPage = ({ params }) => {
-  const resolvedParams = use(params);
-  const { slug, id } = resolvedParams;
-
+const BusinessDetailPage = ({ params }) => {
   const router = useRouter();
+  const [business, setBusiness] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("description");
 
-  const data = cardData[slug]?.find((item) => item.id === parseInt(id));
+  useEffect(() => {
+    const fetchBusinessDetail = async () => {
+      try {
+        const unwrappedParams = await params;
+        const response = await fetch(`http://localhost:5000/api/form/business/${unwrappedParams.id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch business details");
+        }
+        const data = await response.json();
+        setBusiness(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+  
+    fetchBusinessDetail();
+  }, [params]);
 
-  if (!data) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!business) {
     return (
       <div className="min-h-screen flex justify-center items-center px-4">
         <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
@@ -38,10 +70,10 @@ const DetailPage = ({ params }) => {
             />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Data Tidak Ditemukan
+            Usaha Tidak Ditemukan
           </h2>
           <p className="text-gray-600 mb-6">
-            Maaf, data yang Anda cari tidak dapat ditemukan.
+            Maaf, usaha yang Anda cari tidak dapat ditemukan.
           </p>
           <Button
             onClick={() => router.push("/")}
@@ -64,12 +96,13 @@ const DetailPage = ({ params }) => {
         >
           <ChevronLeft className="mr-2" /> Kembali
         </button>
+        
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden grid md:grid-cols-2 gap-8 p-6">
           {/* Image Section */}
           <div className="relative rounded-2xl overflow-hidden">
             <Image
-              src={data.imageUrl}
-              alt={data.title}
+              src={business.fotoUsahaUrl}
+              alt={business.namaUsaha}
               fill
               className="object-cover transition-transform duration-300 hover:scale-105"
             />
@@ -79,10 +112,10 @@ const DetailPage = ({ params }) => {
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                {data.title}
+                {business.namaUsaha}
               </h1>
 
-              {/* Rating */}
+              {/* Rating - Dummy Data */}
               <div className="flex items-center space-x-2 text-yellow-500 mb-6">
                 <Star className="w-6 h-6 fill-current" />
                 <span className="text-2xl font-bold">4.5</span>
@@ -90,16 +123,20 @@ const DetailPage = ({ params }) => {
               </div>
             </div>
 
-            {/* Details Grid */}
+            {/* Details Grid - Mix of Real and Dummy Data */}
             <div className="grid grid-cols-2 gap-4">
               {[
                 { icon: MapPin, label: "Lokasi", value: "Jakarta" },
                 { icon: DollarSign, label: "Harga", value: "Rp 500.000" },
-                { icon: Users, label: "Kapasitas", value: "200 orang" },
+                { 
+                  icon: Check, 
+                  label: "Jenis Usaha", 
+                  value: business.jenisUsaha 
+                },
                 {
-                  icon: Check,
-                  label: "Fasilitas",
-                  value: "AC, Proyektor, Kursi",
+                  icon: Users,
+                  label: "Kontak",
+                  value: business.nomorWhatsApp || "Tidak tersedia"
                 },
               ].map((detail, index) => (
                 <div
@@ -143,7 +180,7 @@ const DetailPage = ({ params }) => {
             <div className="min-h-[200px]">
               {activeTab === "description" ? (
                 <p className="text-gray-600 leading-relaxed">
-                  {data.description}
+                  {business.deskripsiUsaha}
                 </p>
               ) : (
                 <div className="space-y-4">
@@ -157,8 +194,7 @@ const DetailPage = ({ params }) => {
                         <MessageCircle className="w-5 h-5 text-gray-400" />
                       </div>
                       <p className="text-gray-700">
-                        Tempat yang bagus untuk acara, fasilitas lengkap dan
-                        harga terjangkau.
+                        Layanan yang sangat baik dan profesional.
                       </p>
                     </div>
                   ))}
@@ -168,10 +204,10 @@ const DetailPage = ({ params }) => {
 
             {/* Contact Button */}
             <Button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg transition-colors duration-300"
-              onClick={() => alert("buka saja wa-nya!")}
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg transition-colors duration-300"
+              onClick={() => window.open(`https://wa.me/${business.nomorWhatsApp}`, '_blank')}
             >
-              Hubungi Mereka
+              <MessageCircle className="mr-2" /> Hubungi via WhatsApp
             </Button>
           </div>
         </div>
@@ -180,4 +216,4 @@ const DetailPage = ({ params }) => {
   );
 };
 
-export default DetailPage;
+export default BusinessDetailPage;

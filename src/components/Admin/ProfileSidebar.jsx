@@ -7,20 +7,20 @@ export default function ProfileSidebar({ setActivePage }) {
   const sidebarItems = ["Account", "List Business", "Request", "Log Out"];
 
   const handleNavigation = (item) => {
-    setActivePage(item); // Memperbarui halaman yang sedang aktif
+    setActivePage(item); 
   };
 
   return (
     <aside className="flex flex-col items-center px-4 py-10 font-semibold rounded-lg bg-blue-400 bg-opacity-10 min-w-[240px] w-[262px]">
       <div className="flex flex-col items-center text-xl leading-relaxed text-black">
-        <Image
-          width={100}
-          height={100}
-          loading="lazy"
-          src="/Avatar.png"
-          alt="Sofia Havertz Profile"
-          className="object-contain aspect-square w-[82px]"
-        />
+      <Image
+        loading="lazy"
+        src="/Avatar.png"
+        alt="Sofia Havertz Profile"
+        className="object-contain aspect-square w-[82px]"
+        width={82} 
+        height={82} 
+      />
         <div className="mt-1.5">Sofia Havertz</div>
       </div>
       <nav className="flex flex-col mt-10 max-w-full text-base leading-loose text-zinc-500 w-[230px]">

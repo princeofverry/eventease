@@ -8,29 +8,29 @@ const cors = require('cors');
 const path = require('path');
 
 dotenv.config();
-
-const app = express();
-
-// Database connection
 connectDB();
 
-// CORS configuration
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://eventease-coral.vercel.app/'],
+  origin: 'http://localhost:3000',
   credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session configuration
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'mysecret',
     resave: false,
     saveUninitialized: true,
     cookie: { 
-      secure: process.env.NODE_ENV === 'production', 
+      secure: false, 
       maxAge: 24 * 60 * 60 * 1000 // 24 hours
     },
   })
@@ -51,5 +51,14 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Endpoint not found' });
 });
 
-// Export for Vercel
-module.exports = app;
+// Ensure uploads directory exists
+const fs = require('fs');
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)){
+  fs.mkdirSync(uploadsDir);
+}
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
